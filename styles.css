@@ -24,8 +24,8 @@ body {
 
 .nav-logo {
     width: 50px;
-    display: inline-block; /* Ensure the logo and text align */
-    vertical-align: middle; /* Align the logo vertically with the text */
+    display: inline-block;
+    vertical-align: middle; 
 }
 
 .navbar-brand {
