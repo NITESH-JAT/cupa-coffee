@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Gurajada&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gruppo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gantari:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
 /* Global styles */
 body {
     background-image: url(images/homebg.png);
@@ -6,30 +10,33 @@ body {
 }
 
 .navbar{
-    background-color: rgba(57, 34, 34, 0.9);
-    border: 1px;
-    border-radius: 2.5rem;
+    border-radius: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(203, 203, 203, 0.14);
+    backdrop-filter: blur(90.6500015258789px);
+    font-family: "Gruppo", sans-serif;
+    font-size: 1.5rem;
     padding: 1px;
     width: 80%;
-    margin:auto;
+    margin: auto;
     margin-top: 25px;
-    -webkit-border-radius: 2.5rem;
-    -moz-border-radius: 2.5rem;
-    -ms-border-radius: 2.5rem;
-    -o-border-radius: 2.5rem;
 }
 
-.nav-link{
-    font-size: 20px;
-    letter-spacing: 1px;
-    margin: 0.5rem;
+.nav-logo {
+    width: 50px;
+    display: inline-block; /* Ensure the logo and text align */
+    vertical-align: middle; /* Align the logo vertically with the text */
 }
 
 .navbar-brand {
-    margin-left: 30px;
+    font-family: "Gurajada", sans-serif;
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 2rem;
+    display: inline-block;
+    margin-left: 10px; /* Adjust this value to control the gap between the logo and text */
+    vertical-align: middle; /* Align the text with the logo */
 }
+
 
 .hero {
     height: 60vh;
@@ -48,6 +55,7 @@ body {
 }
 
 h1 {
+    font-family: "Fugaz One", sans-serif;
     margin-left: 4rem;
     text-align: center;
     font-size: 4rem;
@@ -127,6 +135,7 @@ h1 {
 }
 
 .menu-h2{
+    font-family: "Gantari", sans-serif;
     padding: 30px;
     font-size: 3rem;
     font-weight: bold;
