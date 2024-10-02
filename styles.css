@@ -24,8 +24,8 @@ body {
 
 .nav-logo {
     width: 50px;
-    display: inline-block;
-    vertical-align: middle; 
+    display: inline-block; /* Ensure the logo and text align */
+    vertical-align: middle; /* Align the logo vertically with the text */
 }
 
 .navbar-brand {
@@ -157,6 +157,109 @@ h1 {
         margin-bottom: 20px; /* Adds space between cards on smaller screens */
     }
 }
+
+
+/*menu page css*/
+/* Hero Products */
+.hero-products {
+    margin-top: -6px;
+    display: flex;
+    justify-content: center;
+    gap: 90px;
+    padding: 30px 0;
+}
+
+.hero-card {
+    width: 350px;
+    height: auto; /* Set height to auto to accommodate image and text */
+    max-height: 500px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: flex-start; /* Align items to the top */
+    align-items: center;
+    color: #fff;
+    font-size: 24px;
+    text-align: center; /* Center text */
+    overflow: hidden; /* Prevent overflow */
+    padding: 20px; /* Add padding to the card */
+}
+
+.hero-card img {
+    width: 100%; /* Make the image responsive */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 405px;
+    max-width: 320px;
+    border-radius: 10px;
+    margin-bottom: 2px;
+}
+
+.hero-card h4 {
+    margin: 5px 0; /* Add margin for spacing */
+    font-size: 25px; /* Adjust font size for product name */
+    color: #caba94;
+
+}
+
+.hero-card .price {
+    font-size: 20px; /* Font size for price */
+    color: #d9534f; /* Adjust color for price */
+    margin-top: 5px; /* Add margin above price */
+}
+
+/* Product Grid */
+.product-grid {
+    background-image: url(images/menubg.png);
+    background-size: 100% 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 30px;
+    justify-items: center;
+}
+
+.product-card {
+    width: 320px;
+    height: auto; /* Set height to auto to accommodate content */
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: flex-start; /* Align items to the top */
+    align-items: center;
+    color: #fff;
+    font-size: 18px;
+    text-align: center; /* Center text */
+    padding-top: 18px; /* Add padding to the card */
+    overflow: hidden; /* Prevent overflow */
+}
+
+.product-card img {
+    width: 100%; /* Make the image responsive */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 390px;
+    max-width: 270px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.product-card h3 {
+    margin: 5px 0; /* Add margin for spacing */
+    font-size: 20px; /* Adjust font size for product name */
+    color: #caba94;
+
+}
+
+.product-card .price {
+    font-size: 16px; /* Font size for price */
+    color: #d9534f; /* Adjust color for price */
+    margin-top: 5px; /* Add margin above price */
+}
+
+
+
+
 
 
 
