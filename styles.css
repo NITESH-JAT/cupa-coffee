@@ -266,10 +266,73 @@ h1 {
     font-family: "Gantari", sans-serif;
 }
 
+/*about us page */
+.about-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    background: url('images/homebg.png');
+    position: relative;
+    background-size: 100% 110%;
+}
 
+.about-container {
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 1300px;
+    width: 100%;
+    gap: 8rem;
+}
 
+.about-image {
+    display: flex;
+    justify-content: center; /* Horizontally center the image */
+    align-items: center;
+    margin-left: 25px;
+}
 
+/* Left side: Image */
+.about-image img {
+    width: 250px; /* Set an appropriate width for the image */
+    height: auto;
+}
 
+/* Right side: Text Content */
+.about-content {
+    margin-left: 60px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.brand-title {
+    font-family: 'Fugaz One', cursive;
+    font-size: 3.5rem;
+    color: #f4e3c1;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.brand-description, .brand-details {
+    font-family: 'Gantari', sans-serif;
+    font-size: 1.6rem;
+    color: #e0d7c6;
+    line-height: 1.6;
+    max-width: 720px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.gujarati-text {
+    font-family: 'Gurajada', cursive;
+    font-size: 1.5rem;
+    color: #f4e3c1;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
 
 
 footer {
