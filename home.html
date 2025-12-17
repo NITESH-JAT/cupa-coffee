@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Cuppaa Coffee | Premium Brews</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&family=Gantari:wght@300;400;600&family=Gruppo&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #caba94;
+            --secondary: #392222;
+            --accent: #d9534f;
+            --dark-bg: #1a1515;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-blur: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            background-image: radial-gradient(circle at 50% 50%, #2a1f1f 0%, #0f0c0c 100%);
+            color: #fff;
+            font-family: 'Gantari', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Fugaz One', cursive;
+            color: var(--primary);
+        }
+
+        /* --- Utility: Glassmorphism --- */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        /* --- Navbar --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s ease;
+        }
+
+        .nav-logo {
+            font-family: 'Gruppo', sans-serif;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 300;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* --- Canvas (Three.js) --- */
+        #webgl-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none; /* Let clicks pass through */
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Align text left */
+            padding: 0 10%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            opacity: 0; /* Handled by GSAP */
+            transform: translateY(30px);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .btn-custom {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-custom:hover {
+            background: var(--primary);
+            color: #000;
+            box-shadow: 0 0 20px rgba(202, 186, 148, 0.4);
+        }
+
+        /* --- Section Styling --- */
+        section {
+            position: relative;
+            z-index: 2;
+            padding: 8rem 10%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            color: var(--primary);
+        }
+
+        /* --- Menu Grid --- */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.4s ease;
+            opacity: 0; /* GSAP reveals this */
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .card img {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            margin-bottom: 1.5rem;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.2); /* Placeholder bg */
+        }
+
+        .card h3 {
+            font-family: 'Gantari', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .card .price {
+            color: var(--accent);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        /* --- About Section --- */
+        .about-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ddd;
+            margin-bottom: 1rem;
+        }
+
+        .gujarati {
+            font-family: serif;
+            color: var(--primary);
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 4rem 10%;
+            background: #0f0c0c;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .about-split { grid-template-columns: 1fr; }
+            .nav-links { display: none; } /* Simplified mobile nav for demo */
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="webgl-canvas"></canvas>
+
+    <nav class="glass">
+        <a href="#" class="nav-logo">THE CUPPAA COFFEE</a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="stagger-text">Sip The Joy,<br>Celebrate With Energy</h1>
+            <p class="stagger-text">Experience the finest blends crafted to keep your rhythm going. Modern tastes for timeless memories.</p>
+            <a href="#menu" class="btn-custom stagger-text">Explore Menu</a>
+        </div>
+    </section>
+
+    <section id="menu">
+        <h2 class="section-title">Curated Blends</h2>
+        <div class="menu-grid">
+            <div class="card glass menu-item">
+                <img src="images/irish.png" onerror="this.src='https://via.placeholder.com/150/392222/caba94?text=Irish'" alt="Irish Coffee">
+                <h3>Irish Cream</h3>
+                <p class="price">₹200</p>
+            </div>
+            <div class="card glass menu-item">
+                <img src="images/oreo.png" onerror="this.src='https://via.placeholder.com/150/392222/caba94?text=Oreo'" alt="Oreo Shake">
+                <h3>Oreo Dream</h3>
+                <p class="price">₹250</p>
+            </div>
+            <div class="card glass menu-item">
+                <img src="images/strawberry.png" onerror="this.src='https://via.placeholder.com/150/392222/caba94?text=Berry'" alt="Strawberry">
+                <h3>Strawberry Bliss</h3>
+                <p class="price">₹180</p>
+            </div>
+             <div class="card glass menu-item">
+                <img src="images/special.png" onerror="this.src='https://via.placeholder.com/150/392222/caba94?text=Special'" alt="Special Blend">
+                <h3>Cuppaa Special</h3>
+                <p class="price">₹200</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="about-split glass" style="padding: 3rem; border-radius: 20px;">
+            <div class="about-text">
+                <h2>Our Story</h2>
+                <p>Step Into The Cuppaa Coffee, where each cup is brewed to give you the energy you need to dance the night away with full <span class="gujarati">જોશ</span>!</p>
+                <p>We’re bringing more than just coffee—we’re serving you the <span class="gujarati">તાજગી</span> to keep your moves going strong.</p>
+            </div>
+            <div class="about-img">
+                <div style="width: 100%; height: 300px; background: rgba(0,0,0,0.3); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                    <span style="color: var(--primary);">Brand Image</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 The Cuppaa Coffee. Crafted with <span style="color:var(--accent)">❤</span> in Three.js</p>
+    </footer>
+
+    <script>
+        // --- 1. THREE.JS SETUP (The 3D Cup) ---
+        const canvas = document.querySelector('#webgl-canvas');
+        const scene = new THREE.Scene();
+        
+        // Camera setup
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 5;
+        camera.position.x = 2; // Offset to right for split layout
+
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+
+        const pointLight = new THREE.PointLight(0xcaba94, 1.5);
+        pointLight.position.set(2, 3, 4);
+        scene.add(pointLight);
+
+        const pointLight2 = new THREE.PointLight(0xd9534f, 0.8);
+        pointLight2.position.set(-3, -2, 2);
+        scene.add(pointLight2);
+
+        // --- Procedural Coffee Cup Group ---
+        const cupGroup = new THREE.Group();
+
+        // Cup Body
+        const geometry = new THREE.CylinderGeometry(1, 0.8, 2, 32);
+        const material = new THREE.MeshPhysicalMaterial({ 
+            color: 0x222222, 
+            roughness: 0.2, 
+            metalness: 0.1,
+            clearcoat: 0.5
+        });
+        const cup = new THREE.Mesh(geometry, material);
+        cupGroup.add(cup);
+
+        // Cup Handle (Torus)
+        const handleGeo = new THREE.TorusGeometry(0.5, 0.1, 16, 100, Math.PI);
+        const handle = new THREE.Mesh(handleGeo, material);
+        handle.position.set(0.9, 0, 0);
+        handle.rotation.z = -Math.PI / 2;
+        cupGroup.add(handle);
+
+        // Coffee Liquid (Top)
+        const liquidGeo = new THREE.CircleGeometry(0.9, 32);
+        const liquidMat = new THREE.MeshBasicMaterial({ color: 0x3d2817 });
+        const liquid = new THREE.Mesh(liquidGeo, liquidMat);
+        liquid.rotation.x = -Math.PI / 2;
+        liquid.position.y = 0.95;
+        cupGroup.add(liquid);
+
+        // Steam Particles (Simple Points)
+        const steamGeo = new THREE.BufferGeometry();
+        const steamCount = 30;
+        const posArray = new Float32Array(steamCount * 3);
+        
+        for(let i = 0; i < steamCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 1; // Spread
+        }
+        
+        steamGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const steamMat = new THREE.PointsMaterial({
+            size: 0.05,
+            color: 0xffffff,
+            transparent: true,
+            opacity: 0.4
+        });
+        const steam = new THREE.Points(steamGeo, steamMat);
+        steam.position.y = 1.2;
+        cupGroup.add(steam);
+
+        scene.add(cupGroup);
+
+        // Initial Position
+        cupGroup.rotation.x = 0.2;
+        cupGroup.rotation.y = -0.5;
+
+        // --- 2. GSAP ANIMATION ---
+        
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Text Entrance
+        gsap.to(".stagger-text", {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power3.out",
+            delay: 0.5
+        });
+
+        // 3D Cup Scroll Interaction
+        // Moves the cup from right to center and rotates it as you scroll
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1
+            }
+        })
+        .to(cupGroup.rotation, { y: Math.PI * 2, x: 0.5 }, 0) // Rotate
+        .to(cupGroup.position, { x: -3, z: -2 }, 0) // Move across screen
+        .to(steam.position, { y: 2.5 }, 0); // Steam rises
+
+        // Menu Cards Entrance
+        gsap.utils.toArray('.menu-item').forEach((item, i) => {
+            gsap.to(item, {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: item,
+                    start: "top 85%",
+                }
+            });
+        });
+
+        // Navbar Blur on Scroll
+        window.addEventListener("scroll", () => {
+            const nav = document.querySelector("nav");
+            if (window.scrollY > 50) {
+                nav.style.background = "rgba(57, 34, 34, 0.8)";
+            } else {
+                nav.style.background = "rgba(255, 255, 255, 0.05)";
+            }
+        });
+
+
+        // --- 3. ANIMATION LOOP ---
+        const clock = new THREE.Clock();
+
+        function animate() {
+            const time = clock.getElapsedTime();
+
+            // Gentle float effect for the cup
+            cupGroup.position.y = Math.sin(time) * 0.1;
+            
+            // Animate Steam
+            const positions = steam.geometry.attributes.position.array;
+            for(let i = 1; i < steamCount * 3; i+=3) {
+                positions[i] += 0.005; // Move up
+                if(positions[i] > 1.5) positions[i] = 0; // Reset
+            }
+            steam.geometry.attributes.position.needsUpdate = true;
+
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        // Resize Handler
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+    </script>
+</body>
+</html>

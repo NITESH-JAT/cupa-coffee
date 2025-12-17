@@ -1,0 +1,358 @@
+@import url('https://fonts.googleapis.com/css2?family=Gurajada&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gruppo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gantari:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap');
+/* Global styles */
+body {
+    background-image: url(images/homebg.png);
+    background-size: 100% 100%;
+    font-family: 'Arial', sans-serif;
+}
+
+.navbar{
+    border-radius: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(203, 203, 203, 0.14);
+    backdrop-filter: blur(90.6500015258789px);
+    font-family: "Gruppo", sans-serif;
+    font-size: 1.5rem;
+    padding: 1px;
+    width: 80%;
+    margin: auto;
+    margin-top: 25px;
+}
+
+.nav-logo {
+    width: 50px;
+    display: inline-block; /* Ensure the logo and text align */
+    vertical-align: middle; /* Align the logo vertically with the text */
+}
+
+.navbar-brand {
+    font-family: "Gurajada", sans-serif;
+    font-weight: bold;
+    font-size: 2rem;
+    display: inline-block;
+    margin-left: 10px; /* Adjust this value to control the gap between the logo and text */
+    vertical-align: middle; /* Align the text with the logo */
+}
+
+
+.hero {
+    height: 60vh;
+    background-size: cover;
+    margin-top: 11rem;
+    background-position: center;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero img{
+    width: 80rem;
+    height: 29rem;
+}
+
+h1 {
+    font-family: "Fugaz One", sans-serif;
+    margin-left: 4rem;
+    text-align: center;
+    font-size: 4rem;
+    color: #caba94;
+    font-weight: bold;
+}
+
+/* Style for the gallery images */
+#gallery{
+    margin-top: -28px;
+}
+.gallery-image {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border: 2px solid white; /* Uniform border around each image */
+  }
+  
+  /* Style for the full-width images */
+  .full-width-image {
+    width: 100%; /* Ensures full width for the 2-column images */
+    height: 350px;
+    object-fit: cover; /* Ensures image scaling without distortion */
+    border: 2px solid white; /* Uniform border around the full-width images */
+  }
+  
+  @media (min-width: 992px) {
+    /* Full width images spanning 2 columns */
+    .full-width-image {
+      width: 200%; /* Spans across two columns */
+    }
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .gallery-image, .full-width-image {
+      height: auto; /* Let height adjust naturally for smaller screens */
+      width: 100%; /* Ensure full-width scaling down for mobile */
+    }
+  }
+
+
+  #menu {
+    margin-top: -46px;
+    background-image: url(images/menubg.png);
+    background-size: cover;
+}
+
+.menu-item {
+    padding-top: 20px;
+    background-color: rgba(57, 34, 34, 0.9); /* White background for the card */
+    border-radius: 10px;
+    border: 2px; /* Border for the card */
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1); /* 3D shadow effect */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    height: 350px; /* Fixed height for the card */
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.image-wrapper {
+    width: 100%;
+    height: 350px; /* Fixed height for the image container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.menu-item img {
+    margin-top: 30px;
+    width: 100%;
+    height: 120%;
+    max-width: 220px;
+}
+
+.menu-h2{
+    font-family: "Gantari", sans-serif;
+    padding: 30px;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #caba94;
+}
+.menu-item h3 {
+    font-family: "Gantari", sans-serif;
+    font-size: 23px;
+    color: #caba94;
+    margin-top: 10px;
+}
+
+.menu-item p{
+    font-size: 17px;
+    color: #d9534f;
+}
+
+/* Hover effect for the card */
+.menu-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .menu-item {
+        margin-bottom: 20px; /* Adds space between cards on smaller screens */
+    }
+}
+
+
+/*menu page css*/
+/* Hero Products */
+.hero-products {
+    margin-top: -6px;
+    display: flex;
+    justify-content: center;
+    gap: 90px;
+    padding: 30px 0;
+}
+
+.hero-card {
+    width: 350px;
+    height: auto; /* Set height to auto to accommodate image and text */
+    max-height: 500px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: flex-start; /* Align items to the top */
+    align-items: center;
+    color: #fff;
+    font-size: 24px;
+    text-align: center; /* Center text */
+    overflow: hidden; /* Prevent overflow */
+    padding: 20px; /* Add padding to the card */
+}
+
+.hero-card img {
+    width: 100%; /* Make the image responsive */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 405px;
+    max-width: 320px;
+    border-radius: 10px;
+    margin-bottom: 2px;
+}
+
+.hero-card h4 {
+    margin: 5px 0; /* Add margin for spacing */
+    font-size: 25px; /* Adjust font size for product name */
+    color: #caba94;
+    font-family: "Gantari", sans-serif;
+}
+
+.hero-card .price {
+    font-size: 20px; /* Font size for price */
+    color: #d9534f; /* Adjust color for price */
+    margin-top: 5px; /* Add margin above price */
+}
+
+/* Product Grid */
+.product-grid {
+    background-image: url(images/menubg.png);
+    background-size: 100% 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 30px;
+    justify-items: center;
+}
+
+.product-card {
+    width: 320px;
+    height: auto; /* Set height to auto to accommodate content */
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: flex-start; /* Align items to the top */
+    align-items: center;
+    color: #fff;
+    font-size: 18px;
+    text-align: center; /* Center text */
+    padding-top: 18px; /* Add padding to the card */
+    overflow: hidden; /* Prevent overflow */
+}
+
+.product-card img {
+    width: 100%; /* Make the image responsive */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 390px;
+    max-width: 270px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.product-card h3 {
+    margin: 5px 0; /* Add margin for spacing */
+    font-size: 20px; /* Adjust font size for product name */
+    color: #caba94;
+    font-family: "Gantari", sans-serif;
+}
+
+.product-card .price {
+    font-size: 16px; /* Font size for price */
+    color: #d9534f; /* Adjust color for price */
+    margin-top: 5px; /* Add margin above price */
+}
+
+
+/*about us page */
+.about-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    background: url('images/homebg.png');
+    position: relative;
+    background-size: 100% 110%;
+}
+
+.about-container {
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 1300px;
+    width: 100%;
+    gap: 8rem;
+}
+
+.about-image {
+    display: flex;
+    justify-content: center; /* Horizontally center the image */
+    align-items: center;
+    margin-left: 25px;
+}
+
+/* Left side: Image */
+.about-image img {
+    width: 250px; /* Set an appropriate width for the image */
+    height: auto;
+}
+
+/* Right side: Text Content */
+.about-content {
+    margin-left: 60px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.brand-title {
+    font-family: 'Fugaz One', cursive;
+    font-size: 3.5rem;
+    color: #f4e3c1;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.brand-description, .brand-details {
+    font-family: 'Gantari', sans-serif;
+    font-size: 1.6rem;
+    color: #e0d7c6;
+    line-height: 1.6;
+    max-width: 720px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.gujarati-text {
+    font-family: 'Gurajada', cursive;
+    font-size: 1.5rem;
+    color: #f4e3c1;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+
+
+
+
+footer {
+    background-image: url(./images/footerbg.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #bbb;
+}
+
+.footer-logo img{
+    width: 10rem;
+}
+
+footer a {
+    color: #bbb;
+}
+
+footer a:hover {
+    color: #fff;
+}
